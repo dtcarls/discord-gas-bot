@@ -171,13 +171,14 @@ def main(source, verbose=False):
         config = yaml.load(f, Loader=yaml.Loader)
 
     async def send_update(fastest, average, slow, **kw):
-        status = f'⚡{fastest} |🐢{slow} | !help'
-        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing,
+        #status = f'⚡{fastest} |🐢{slow} | !help'
+        status = f'Gwei from {source}'
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,
                                                             name=status))
 
         for guild in bot.guilds:
             guser = guild.get_member(bot.user.id);
-            await guser.edit(nick=f'Gas: 🚶{average}');
+            await guser.edit(nick=f'⚡{fastest}|🚶{average}|🐢{slow}');
 
         await asyncio.sleep(config['updateFreq'])  # in seconds
 
